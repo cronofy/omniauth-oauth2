@@ -53,13 +53,21 @@ module OmniAuth
       end
 
       def authorize_params
-        options.authorize_params[:state] = SecureRandom.hex(24)
+        if session["omniauth.state_expires"] && session["omniauth.state"] && session["omniauth.state_expires"].to_i > Time.now.to_i
+          options.authorize_params[:state] = session["omniauth.state"]
+        else
+          options.authorize_params[:state] = SecureRandom.hex(24)
+        end
+
         params = options.authorize_params.merge(options_for("authorize"))
         if OmniAuth.config.test_mode
           @env ||= {}
           @env["rack.session"] ||= {}
         end
+
         session["omniauth.state"] = params[:state]
+        session["omniauth.state_expires"] = Time.now.to_i + (1 * 60 * 60)
+
         params
       end
 
@@ -71,8 +79,12 @@ module OmniAuth
         error = request.params["error_reason"] || request.params["error"]
         if error
           fail!(error, CallbackError.new(request.params["error"], request.params["error_description"] || request.params["error_reason"], request.params["error_uri"]))
-        elsif !options.provider_ignores_state && (request.params["state"].to_s.empty? || request.params["state"] != session.delete("omniauth.state"))
-          fail!(:csrf_detected, CallbackError.new(:csrf_detected, "CSRF detected"))
+        elsif !options.provider_ignores_state && (request.params["state"].to_s.empty? || request.params["state"] != session["omniauth.state"])
+          if session["omniauth.state"]
+            fail!(:csrf_detected, CallbackError.new(:csrf_detected, "CSRF detected - mismatched state"))
+          else
+            fail!(:csrf_detected, CallbackError.new(:csrf_detected, "CSRF detected - missing state"))
+          end
         else
           self.access_token = build_access_token
           self.access_token = access_token.refresh! if access_token.expired?
