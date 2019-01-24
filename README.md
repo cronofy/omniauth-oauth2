@@ -1,16 +1,17 @@
 # OmniAuth OAuth2
 
 [![Gem Version](http://img.shields.io/gem/v/omniauth-oauth2.svg)][gem]
-[![Build Status](http://img.shields.io/travis/intridea/omniauth-oauth2.svg)][travis]
-[![Dependency Status](http://img.shields.io/gemnasium/intridea/omniauth-oauth2.svg)][gemnasium]
+[![Build Status](http://img.shields.io/travis/omniauth/omniauth-oauth2.svg)][travis]
+[![Dependency Status](http://img.shields.io/gemnasium/omniauth/omniauth-oauth2.svg)][gemnasium]
 [![Code Climate](http://img.shields.io/codeclimate/github/intridea/omniauth-oauth2.svg)][codeclimate]
 [![Coverage Status](http://img.shields.io/coveralls/intridea/omniauth-oauth2.svg)][coveralls]
+[![Security](https://hakiri.io/github/omniauth/omniauth-oauth2/master.svg)](https://hakiri.io/github/omniauth/omniauth-oauth2/master)
 
 [gem]: https://rubygems.org/gems/omniauth-oauth2
-[travis]: http://travis-ci.org/intridea/omniauth-oauth2
-[gemnasium]: https://gemnasium.com/intridea/omniauth-oauth2
-[codeclimate]: https://codeclimate.com/github/intridea/omniauth-oauth2
-[coveralls]: https://coveralls.io/r/intridea/omniauth-oauth2
+[travis]: http://travis-ci.org/omniauth/omniauth-oauth2
+[gemnasium]: https://gemnasium.com/github.com/omniauth/omniauth-oauth2
+[codeclimate]: https://codeclimate.com/github/omniauth/omniauth-oauth2
+[coveralls]: https://coveralls.io/r/omniauth/omniauth-oauth2
 
 This gem contains a generic OAuth2 strategy for OmniAuth. It is meant to serve
 as a building block strategy for other strategies and not to be used
@@ -64,4 +65,3 @@ end
 
 That's pretty much it!
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/intridea/omniauth-oauth2/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
